@@ -1,8 +1,8 @@
 # Copilot Instructions for AI Agents
 
 ## Visão Geral do Projeto
-- **Comida em Casa API** é um sistema multi-tenant para gestão de insumos, ofertas, receitas, inventário e usuários, focado em cozinhas profissionais.
-- Backend em **Laravel 12 (PHP 8.3)**, frontend com **Inertia.js** e **Vue 3**, banco de dados **MySQL 8.0**.
+- **ingredientefacil** é um sistema multi-tenant para gestão de insumos, ofertas, receitas, inventário e usuários, focado em cozinhas profissionais.
+- Backend em **Laravel 12 (PHP 8.3)**, frontend com **Blade**, **Bootstrap** e **FontAwesome**, banco de dados **MySQL 8.0**.
 - Autenticação via **Laravel Sanctum** (token API).
 - Deploy e desenvolvimento via **Docker/Laravel Sail**.
 
@@ -34,7 +34,7 @@
 ## Arquitetura e Convenções
 - **Rotas:**
   - API: `routes/api.php` (RESTful, usa apiResource)
-  - Web: `routes/web.php` (Inertia.js, renderiza Vue)
+  - Web: `routes/web.php` (Blade, renderiza views)
 - **Controllers:**
   - Preferência por **Single-Action Controllers** para endpoints REST.
   - Validação via **Form Request** (ex: `app/Http/Requests/`)
@@ -57,9 +57,9 @@
 - **Permissões:**
   - Controle por módulo/ação, configurado via JSON na tabela pivot.
 - **Frontend:**
-  - Componentes Vue em `resources/js/Pages/`
-  - Estilos com TailwindCSS (`resources/css/app.css`)
-  - Build com Vite (`vite.config.js`)
+  - Views Blade em `resources/views/`
+  - Estilos com Bootstrap (veja `public/` e `resources/`)
+  - Ícones com FontAwesome
 
 ## Exemplos de Rotas Importantes
 - `GET /api/dashboard/stats` — Estatísticas gerais
