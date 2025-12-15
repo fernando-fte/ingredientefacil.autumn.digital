@@ -1,4 +1,2 @@
-import './bootstrap';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap';
+// JS customizado do projeto. Bootstrap já está incluso via CDN no layout.
