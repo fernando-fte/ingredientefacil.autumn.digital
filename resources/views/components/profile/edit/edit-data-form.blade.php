@@ -1,7 +1,7 @@
 <div class="card mb-4">
     <div class="card-header">Editar Dados do Perfil</div>
     <div class="card-body">
-        <form method="POST" action="{{ route('profile.update') }}">
+        <form method="POST" action="{{ route('web.profile.update') }}">
             @csrf
             @method('PATCH')
             <div class="mb-3">

@@ -9,7 +9,7 @@
                 @if(session('status'))
                     <div class="alert alert-success">{{ session('status') }}</div>
                 @endif
-                <form method="POST" action="{{ route('login') }}">
+                <form method="POST" action="{{ route('web.login') }}">
                     @csrf
                     <div class="mb-3">
                         <label for="email" class="form-label">E-mail</label>

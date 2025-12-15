@@ -14,7 +14,7 @@
             </div>
         </li>
         <li>
-            <a class="dropdown-item d-flex align-items-center gap-2" href="{{ route('profile.edit') }}">
+            <a class="dropdown-item d-flex align-items-center gap-2" href="{{ route('web.profile.edit') }}">
                 <i class="fa fa-cog"></i> Configurações
             </a>
         </li>
@@ -30,7 +30,7 @@
         </li>
         <li><hr class="dropdown-divider"></li>
         <li>
-            <form method="POST" action="{{ route('logout') }}" class="m-0">
+            <form method="POST" action="{{ route('web.logout') }}" class="m-0">
                 @csrf
                 <button type="submit" class="dropdown-item d-flex align-items-center gap-2">
                     <i class="fa fa-sign-out-alt"></i> Sair

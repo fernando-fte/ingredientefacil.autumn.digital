@@ -1,7 +1,7 @@
 <div class="card mb-4">
     <div class="card-header">Alterar Senha</div>
     <div class="card-body">
-        <form method="POST" action="{{ route('profile.update') }}" data-profile-edit-password-form>
+        <form method="POST" action="{{ route('web.profile.update') }}" data-profile-edit-password-form>
             @csrf
             @method('PATCH')
             <div class="mb-3">
