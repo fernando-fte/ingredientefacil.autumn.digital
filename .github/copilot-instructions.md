@@ -61,12 +61,6 @@
   - Estilos com Bootstrap (veja `public/` e `resources/`)
   - Ícones com FontAwesome
 
-## Exemplos de Rotas Importantes
-- `GET /api/dashboard/stats` — Estatísticas gerais
-- `CRUD /api/insumos` — Ingredientes
-- `POST /api/insumos/{id}/share` — Compartilhamento de insumos (autenticado)
-- `GET /api/receitas/gargalos` — Alertas de produção
-
 ## Outras Dicas
 - Variáveis de ambiente: veja `.env.example`.
 - Sempre siga PSR-12 e padrões Laravel.
