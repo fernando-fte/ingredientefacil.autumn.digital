@@ -42,4 +42,3 @@
         </script>
     @endpush
 @endonce
-</script>
