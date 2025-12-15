@@ -7,11 +7,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
-        <div class="container">
-            <a class="navbar-brand" href="/">{{ config('app.name', 'Laravel') }}</a>
-        </div>
-    </nav>
+    <x-layout.menu />
     <main class="container">
         @yield('content')
     </main>
