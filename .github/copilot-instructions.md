@@ -32,6 +32,36 @@
   - Documentação extra: `.github/instructions/`
 
 ## Arquitetura e Convenções
+
+### Scripts em Componentes Blade
+
+**Boas práticas para scripts em componentes Blade reutilizáveis:**
+
+- Sempre que um componente Blade precisar de JavaScript próprio, utilize o stack Blade (`@push('scripts')`) junto com a diretiva `@once`. Isso garante que o script será incluído apenas uma vez no final da página, mesmo que o componente seja chamado múltiplas vezes em diferentes partes da view.
+
+- Para evitar conflitos entre múltiplas instâncias do mesmo componente, nunca utilize IDs fixos em elementos HTML. Prefira sempre data-atributos exclusivos (ex: `data-profile-edit-*`). Assim, cada instância do componente pode ser manipulada de forma isolada pelo JavaScript.
+
+- Quando houver elementos que podem aparecer repetidamente na página (exemplo: múltiplos formulários do mesmo tipo), selecione todos eles usando `document.querySelectorAll` e itere sobre o resultado, aplicando listeners individualmente a cada elemento. Isso evita que um script afete apenas o primeiro elemento encontrado ou cause bugs ao manipular múltiplas instâncias.
+
+- Nunca use `getElementById` para elementos que podem se repetir, pois IDs devem ser únicos por página e podem causar comportamento inesperado.
+
+**Exemplo de uso recomendado:**
+  - No componente Blade:
+    ```blade
+    @once
+        @push('scripts')
+            <script>
+            document.querySelectorAll('[data-profile-edit-password-form]').forEach(form => {
+                // Adicione listeners e lógica para cada form individualmente
+            });
+            </script>
+        @endpush
+    @endonce
+    ```
+  - No layout principal, antes do `</body>`:
+    ```blade
+    @stack('scripts')
+    ```
 - **Rotas:**
   - API: `routes/api.php` (RESTful, usa apiResource)
   - Web: `routes/web.php` (Blade, renderiza views)
