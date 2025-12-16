@@ -1,3 +1,18 @@
+## Boas práticas para diretivas Blade em atributos HTML
+
+**Nunca** utilize diretivas Blade como `@error`, `@enderror`, `@if`, `@endif` diretamente dentro de atributos de tags HTML (ex: class="...").
+
+**Correto:**
+```blade
+<input class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}">
+```
+
+**Errado:**
+```blade
+<input class="form-control @error('password') is-invalid @enderror">
+```
+
+Sempre utilize a interpolação `{{ ... }}` para lógica condicional em atributos.
 # Copilot Instructions for AI Agents
 
 ## Visão Geral do Projeto

@@ -4,14 +4,20 @@
         <form method="POST" action="{{ route('web.profile.update') }}" data-profile-edit-password-form>
             @csrf
             @method('PATCH')
+            <input type="hidden" name="name" value="{{ auth()->user()->name }}">
+            <input type="hidden" name="email" value="{{ auth()->user()->email }}">
             <div class="mb-3">
                 <label for="password" class="form-label">Nova senha</label>
-                <input type="password" class="form-control" name="password" autocomplete="new-password" data-profile-edit-password>
+                <input type="password" class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}" name="password" autocomplete="new-password" data-profile-edit-password>
+                <x-layout.form.input-error for="password" />
             </div>
             <div class="mb-3">
                 <label for="password_confirmation" class="form-label">Confirmar nova senha</label>
                 <input type="password" class="form-control" name="password_confirmation" autocomplete="new-password" data-profile-edit-password-confirmation>
             </div>
+        
+            <x-layout.form.all-errors />
+
             <div class="text-danger mb-2" data-profile-edit-password-error style="display:none;"></div>
             <button type="submit" class="btn btn-warning">Alterar Senha</button>
         </form>
