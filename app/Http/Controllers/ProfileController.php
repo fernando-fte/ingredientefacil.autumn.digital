@@ -33,7 +33,6 @@ class ProfileController extends Controller
             $user->email_verified_at = null;
         }
 
-        dd($request->all());
         // Atualiza a senha se enviada
         if ($request->filled('password')) {
             $user->password = $request->input('password');
