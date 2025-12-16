@@ -1,3 +1,104 @@
+# Delegação de Ações entre Controllers
+
+Em vez de implementar toda a lógica diretamente no método do controller, utilize a delegação para controllers de ação (Action Controllers) usando o padrão:
+
+```php
+public function store(Request $request)
+{
+  return app(UserStoreController::class)($request);
+}
+```
+
+Isso permite separar a lógica de domínio da definição da rota/controller, facilitando manutenção, testes e reaproveitamento.
+
+---
+
+# Métodos Utilitários no Controller Base
+
+Implemente métodos utilitários no controller base para padronizar respostas e tratamento de erros:
+
+```php
+protected static function success(?string $view = null, ?array $data = null, int $code = 200)
+{
+  if (self::isApi()) {
+    return response()->json(['success' => true, 'data' => $data], $code);
+  }
+  if(Self::$back) return redirect()->back();
+  return view($view, $data);
+}
+
+protected static function fatal(?string $message = null, $exception = null, int $code = 500)
+{
+  // Log, tratamento e resposta padronizada de erro
+  if (self::isApi()) {
+    return response()->json(['success' => false, 'error' => $message], $code);
+  }
+  return redirect()->back()->withErrors(['error' => $message]);
+}
+```
+
+---
+
+# Tratamento Padronizado de Exceções
+
+Utilize sempre try/catch nos métodos dos controllers para garantir respostas amigáveis e padronizadas em caso de erro:
+
+```php
+public function __invoke(Request $request)
+{
+  try {
+    // lógica
+    return self::success('view', $data);
+  } catch (\Exception $exception) {
+    return self::fatal('Mensagem de erro', $exception);
+  }
+}
+```
+
+---
+
+# Controllers de Ação (Action Controllers)
+
+Implemente controllers de ação para isolar a lógica de cada operação. O controller de rota apenas delega:
+
+```php
+public function store(Request $request)
+{
+  return app(UserStoreControllerAction::class)($request);
+}
+```
+
+---
+
+# Respostas Web e API
+
+Os métodos utilitários do controller base devem diferenciar automaticamente entre resposta para web (view/redirect) e API (JSON), conforme o contexto da requisição.
+
+---
+
+# Assinatura dos Métodos
+
+Prefira usar model binding do Laravel quando possível:
+
+```php
+public function destroy(User $user)
+{
+  // ...
+}
+```
+Ou, se necessário, receba o id e faça a busca manualmente:
+
+```php
+public function destroy(Request $request, $id)
+{
+  $user = User::findOrFail($id);
+  // ...
+}
+```
+
+Padronize a assinatura conforme a necessidade do domínio e clareza do código.
+
+---
 ## Organização Recomendada das Rotas (`web.php`)
 
 - **Agrupe rotas por domínio usando `prefix` e `name`:**
