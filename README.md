@@ -57,3 +57,15 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Permissões em Desenvolvimento
+
+> Atenção: Durante o desenvolvimento, pode ser necessário liberar permissões totais (777) para todos os arquivos e pastas do projeto para evitar erros de acesso com Docker/Sail:
+>
+> ```bash
+> chmod -R 777 .
+> ```
+>
+> **Nunca use 777 em produção!**
+>
+> **Importante:** Ao finalizar o desenvolvimento, lembre-se de remover essa permissão ampla e aplicar permissões mais restritas para segurança.
