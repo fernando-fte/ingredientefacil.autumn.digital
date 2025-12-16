@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Support\Facades\Redirect;
-use App\Http\Requests\User\UserDestroyRequest;
+use Exception;
 
 class UserDestroyController extends UserController
 {
@@ -13,9 +11,15 @@ class UserDestroyController extends UserController
     {
         try {
             $user->delete();
-            return redirect()->route('web.users.index')->with('success', 'Usuário removido com sucesso!');
-        } catch (\Throwable $th) {
-            throw $th;
+
+            $response = [
+                'message' => 'Usuário removido com sucesso',
+                'users' => User::orderByDesc('created_at')->get(['id', 'name']),
+            ];
+
+            return self::success('users.index', $response);
+        } catch (Exception $exception) {
+            return self::fatal('Erro ao remover usuário', $exception);
         }
     }
 }

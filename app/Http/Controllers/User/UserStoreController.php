@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\User\UserStoreRequest;
 use App\Models\User;
+use Exception;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Redirect;
 
 class UserStoreController extends UserController
 {
@@ -18,9 +17,14 @@ class UserStoreController extends UserController
                 'email' => $request->input('email'),
                 'password' => Hash::make($request->input('password')),
             ]);
-            return Redirect::route('web.users.index')->with('success', 'Usuário criado com sucesso!');
-        } catch (\Throwable $th) {
-            return Redirect::back()->withErrors(['error' => 'Erro ao criar usuário.'])->withInput();
+
+            $response = [
+                'user' => $user,
+            ];
+            
+            return self::success('users.index', $response);
+        } catch (Exception $exception) {
+            return self::fatal('Erro ao criar usuário', $exception);
         }
     }
 }
