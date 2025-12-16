@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use Exception;
 use Illuminate\Http\Request;
 
-class FoodCreateController extends Controller
+class FoodUpdateController extends Controller
 {
-    public function __invoke(Request $request)
+    public function __invoke(Request $request, $food)
     {
         try {
 
@@ -18,9 +18,9 @@ class FoodCreateController extends Controller
                 // Dados da receita a serem exibidos
             ];
 
-            return self::success('food.store', $response);
+            return self::back()::success('', $response);
         } catch (Exception $exception) {
-            return self::fatal('Erro ao armazenar receita', $exception);
+            return self::fatal('Erro ao atualizar receita', $exception);
         }
     }
 }

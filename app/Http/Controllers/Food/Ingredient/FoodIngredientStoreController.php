@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Food;
+namespace App\Http\Controllers\Food\Ingredient;
 
-use App\Http\Controllers\Controller;
 use Exception;
 use Illuminate\Http\Request;
 
-class FoodCreateController extends Controller
+class FoodIngredientStoreController extends FoodIngredientController
 {
     public function __invoke(Request $request)
     {
@@ -18,9 +17,9 @@ class FoodCreateController extends Controller
                 // Dados da receita a serem exibidos
             ];
 
-            return self::success('food.store', $response);
+            return self::back()::success('', $response);
         } catch (Exception $exception) {
-            return self::fatal('Erro ao armazenar receita', $exception);
+            return self::fatal('Erro ao armazenar ingrediente da receita', $exception);
         }
     }
 }

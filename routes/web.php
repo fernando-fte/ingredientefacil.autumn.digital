@@ -1,6 +1,12 @@
 <?php
 
+use App\Http\Controllers\Food\Cost\FoodCostStoreController;
+use App\Http\Controllers\Food\Cost\FoodCostUpdateController;
 use App\Http\Controllers\Food\FoodCreateController;
+use App\Http\Controllers\Food\FoodShowController;
+use App\Http\Controllers\Food\FoodUpdateController;
+use App\Http\Controllers\Food\Ingredient\FoodIngredientStoreController;
+use App\Http\Controllers\Food\Ingredient\FoodIngredientUpdateController;
 use App\Http\Controllers\Profile\ProfileDestroyController;
 use App\Http\Controllers\Profile\ProfileEditController;
 use App\Http\Controllers\Profile\ProfileUpdateController;
@@ -33,8 +39,29 @@ Route::middleware('auth')->group(function () {
         Route::delete('/{user}', UserDestroyController::class)->name('destroy');
     });
 
-    Route::prefix('food')->name('web.food.')->group(function () {
-        Route::get('/create', FoodCreateController::class)->name('create');
+    Route::prefix('/receita')->name('web.food.')->group(function () {
+        Route::get('/', FoodShowController::class)->name('show');
+        Route::post('/', FoodCreateController::class)->name('create');
+        
+        Route::prefix('{food}')->group(function () {
+            Route::patch('/', FoodUpdateController::class)->name('update');
+            
+            Route::prefix('/ingrediente')->name('web.food.ingredient.')->group(function () {
+                Route::post('/', FoodIngredientStoreController::class)->name('store');
+
+                Route::prefix('{ingredient}')->group(function () {
+                    Route::post('/', FoodIngredientUpdateController::class)->name('update');
+                });
+            });
+
+            Route::prefix('/custo-operacional')->name('web.food.costs.')->group(function () {
+                Route::post('/', FoodCostStoreController::class)->name('store');
+
+                Route::prefix('{cost}')->group(function () {
+                    Route::post('/', FoodCostUpdateController::class)->name('update');
+                });
+            });
+        });
     });
 });
 
