@@ -1,3 +1,4 @@
+# 📄 Para padrões e boas práticas de controllers e rotas, consulte `.github/instructions/doc.controller.md`.
 ## Boas práticas para diretivas Blade em atributos HTML
 
 **Nunca** utilize diretivas Blade como `@error`, `@enderror`, `@if`, `@endif` diretamente dentro de atributos de tags HTML (ex: class="...").
