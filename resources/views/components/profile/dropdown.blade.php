@@ -19,6 +19,11 @@
             </a>
         </li>
         <li>
+            <a class="dropdown-item d-flex align-items-center gap-2" href="{{ route('web.users.index') }}">
+                <i class="fa fa-users"></i> Usuários
+            </a>
+        </li>
+        <li>
             <a class="dropdown-item d-flex align-items-center gap-2" href="#">
                 <i class="fa fa-question-circle"></i> Ajuda
             </a>

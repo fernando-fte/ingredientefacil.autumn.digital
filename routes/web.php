@@ -3,7 +3,10 @@
 use App\Http\Controllers\Profile\ProfileDestroyController;
 use App\Http\Controllers\Profile\ProfileEditController;
 use App\Http\Controllers\Profile\ProfileUpdateController;
-use App\Http\Controllers\UsersController;
+use App\Http\Controllers\User\UserIndexController;
+use App\Http\Controllers\User\UserCreateController;
+use App\Http\Controllers\User\UserStoreController;
+use App\Http\Controllers\User\UserDestroyController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -23,10 +26,10 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::prefix('usuarios')->name('web.users.')->group(function () {
-        Route::get('/', [UsersController::class, 'index'])->name('index');
-        Route::get('/novo', [UsersController::class, 'create'])->name('create');
-        Route::post('/', [UsersController::class, 'store'])->name('store');
-        Route::delete('/{id}', [UsersController::class, 'destroy'])->name('destroy');
+        Route::get('/', UserIndexController::class)->name('index');
+        Route::get('/novo', UserCreateController::class)->name('create');
+        Route::post('/', UserStoreController::class)->name('store');
+        Route::delete('/{user}', UserDestroyController::class)->name('destroy');
     });
 });
 
