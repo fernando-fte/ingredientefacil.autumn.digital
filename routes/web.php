@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Food\FoodCreateController;
 use App\Http\Controllers\Profile\ProfileDestroyController;
 use App\Http\Controllers\Profile\ProfileEditController;
 use App\Http\Controllers\Profile\ProfileUpdateController;
@@ -30,6 +31,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/novo', UserCreateController::class)->name('create');
         Route::post('/', UserStoreController::class)->name('store');
         Route::delete('/{user}', UserDestroyController::class)->name('destroy');
+    });
+
+    Route::prefix('food')->name('web.food.')->group(function () {
+        Route::get('/create', FoodCreateController::class)->name('create');
     });
 });
 
