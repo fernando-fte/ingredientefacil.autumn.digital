@@ -1,6 +1,8 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Profile\ProfileDestroyController;
+use App\Http\Controllers\Profile\ProfileEditController;
+use App\Http\Controllers\Profile\ProfileUpdateController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,9 +17,9 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
 
     Route::prefix('perfil')->name('web.profile.')->group(function () {
-        Route::get('/', [ProfileController::class, 'edit'])->name('edit');
-        Route::patch('/', [ProfileController::class, 'update'])->name('update');
-        Route::delete('/', [ProfileController::class, 'destroy'])->name('destroy');
+        Route::get('/', ProfileEditController::class)->name('edit');
+        Route::patch('/', ProfileUpdateController::class)->name('update');
+        Route::delete('/', ProfileDestroyController::class)->name('destroy');
     });
 
     Route::prefix('usuarios')->name('web.users.')->group(function () {
