@@ -3,6 +3,7 @@
 use App\Http\Controllers\Food\Cost\FoodCostStoreController;
 use App\Http\Controllers\Food\Cost\FoodCostUpdateController;
 use App\Http\Controllers\Food\FoodCreateController;
+use App\Http\Controllers\Food\FoodIndexController;
 use App\Http\Controllers\Food\FoodShowController;
 use App\Http\Controllers\Food\FoodUpdateController;
 use App\Http\Controllers\Food\Ingredient\FoodIngredientStoreController;
@@ -40,10 +41,11 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::prefix('/receita')->name('web.food.')->group(function () {
-        Route::get('/', FoodShowController::class)->name('show');
+        Route::get('/', FoodIndexController::class)->name('index');
         Route::post('/', FoodCreateController::class)->name('create');
         
         Route::prefix('{food}')->group(function () {
+            Route::get('/', FoodShowController::class)->name('show');
             Route::patch('/', FoodUpdateController::class)->name('update');
             
             Route::prefix('/ingrediente')->name('web.food.ingredient.')->group(function () {

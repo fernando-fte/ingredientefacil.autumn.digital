@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use Exception;
 use Illuminate\Http\Request;
 
-class FoodShowController extends FoodController
+class FoodIndexController extends FoodController
 {
-    public function __invoke(Request $request, $food)
+    public function __invoke(Request $request)
     {
         try {
 
@@ -18,7 +18,7 @@ class FoodShowController extends FoodController
                 // Dados da receita a serem exibidos
             ];
 
-            return self::success('food.show', $response);
+            return self::success('food.index', $response);
         } catch (Exception $exception) {
             return self::fatal('Erro ao exibir receita', $exception);
         }

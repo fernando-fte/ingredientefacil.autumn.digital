@@ -66,19 +66,23 @@
                 <input class="form-check-input" type="checkbox" role="switch" data-preparo-ingrediente-switch checked>
                 <label class="form-check-label small">Exibir preparo por ingrediente</label>
             </div>
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalIngrediente">+ Adicionar ingrediente</button>
-        </div>
+            <span class="mx-1"></span>
+            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalIngrediente">+ Adicionar ingrediente</button>
+        </div>  
     </div>
+
+    @foreach(['1','2', '3'] as $item)
+      
     <div class="card mb-4">
         <div class="card-body">
             <div class="d-flex align-items-start justify-content-between gap-3">
                 <div class="flex-grow-1">
                     <div class="row g-2">
-                        <div class="col-6 col-md-3">
+                        <div class="col-6 col-md-6">
                             <div class="fw-semibold fs-4">Farinha de Trigo</div>
                             <div class="text-muted small">R$ 23,99 (pacote 5.000g) • R$ 0,004798/g</div>
                         </div>
-                        <div class="col-12 col-md-6">
+                        <div class="col-4 col-md-3">
                             <div class="row g-2">
                                 <div class="col-12 col-md-6">
                                     <div class="text-muted small fw-semibold" style="font-size: 0.7em;">Quantidade <span class="badge text-bg-light border">fc 1.0</span></div>
@@ -92,6 +96,17 @@
                                 </div>
                             </div>
                         </div>
+                        
+                        <div class="col-2 col-md-3 text-end">
+                            <div class="d-flex align-items-center gap-2">
+                                <button class="btn btn-lg btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalIngrediente" title="Editar">
+                                    <i class="fa fa-pen"></i>
+                                </button>
+                                <button class="btn btn-lg btn-outline-danger" title="Remover">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                     <div class="mt-3" data-preparo-ingrediente-box>
                         <hr class="my-2">
@@ -99,19 +114,10 @@
                         <div class="small">Misture com os outros ingredientes.</div>
                     </div>
                 </div>
-                <div class="dropdown">
-                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
-                        Opções
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalIngrediente">Editar</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item text-danger" href="#">Remover</a></li>
-                    </ul>
-                </div>
             </div>
         </div>
     </div>
+    @endforeach
 
     <!-- Custo operacional -->
     <div class="d-flex align-items-center justify-content-between mb-2">
@@ -375,14 +381,17 @@
 @once
   @push('scripts')
     <script>
-    document.querySelectorAll('[data-preparo-ingrediente-switch]').forEach(switchEl => {
+    document.querySelectorAll('[data-preparo-ingrediente-switch]').forEach(switchPrepare => {
       // Busca o box mais próximo dentro do mesmo card/componente
-      const box = switchEl.closest('.card, .container, form, body').querySelector('[data-preparo-ingrediente-box]');
-      if (switchEl && box) {
-        const apply = () => box.style.display = switchEl.checked ? 'block' : 'none';
-        switchEl.addEventListener('change', apply);
-        apply();
-      }
+      const prepares = document.querySelectorAll('[data-preparo-ingrediente-box]');
+
+      prepares.forEach(prepare => {
+          if (switchPrepare && prepare) {
+            const apply = () => prepare.style.display = switchPrepare.checked ? 'block' : 'none';
+            switchPrepare.addEventListener('change', apply);
+            apply();
+          }
+      });
     });
     </script>
   @endpush
