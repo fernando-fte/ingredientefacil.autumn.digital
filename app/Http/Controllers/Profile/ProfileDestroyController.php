@@ -12,14 +12,18 @@ class ProfileDestroyController extends ProfileController
 {
     public function __invoke(ProfileDestroyRequest $request)
     {
-        $user = $request->user();
+        try {
+            $user = $request->user();
 
-        Auth::logout();
-        $user->delete();
+            Auth::logout();
+            $user->delete();
 
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
 
-        return Redirect::to('/');
+            return Redirect::to('/');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 }
