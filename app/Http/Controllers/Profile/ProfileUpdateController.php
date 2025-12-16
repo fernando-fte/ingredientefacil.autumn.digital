@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Profile\ProfileUpdateRequest;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
@@ -26,9 +27,11 @@ class ProfileUpdateController extends ProfileController
 
             $user->save();
 
-            return Redirect::route('web.profile.edit')->with('status', 'profile-updated');
-        } catch (\Throwable $th) {
-            throw $th;
+            $response = [];
+
+            return self::back()::success('web.profile.edit', $response)->with('status', 'profile-updated');
+        } catch (Exception $exception) {
+            return self::fatal('Erro ao atualizar perfil', $exception);
         }
     }
 }

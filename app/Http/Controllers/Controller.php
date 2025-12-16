@@ -95,7 +95,7 @@ abstract class Controller
     {
         Self::$back = true;
         Self::$message = $message;
-        return (new Self);
+        return (new static);
     }
 
     protected static function formatPaginate(LengthAwarePaginator $paginate, bool $onlyApi = true)//: LengthAwarePaginator|object
