@@ -177,60 +177,16 @@
 </div>
 
 <!-- ========================================================= -->
-<!-- MODAL 1: Receita (Novo/Editar) -->
+<!-- MODAL 1: Receita (Novo/Editar) - COMPONENTE -->
 <!-- ========================================================= -->
-<div class="modal fade" id="modalReceita" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <form class="modal-content" method="post" action="#">
-      <div class="modal-header">
-        <h5 class="modal-title">Novo/Editar</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-
-      <div class="modal-body">
-        <div class="mb-3">
-          <label class="form-label">Nome</label>
-          <input type="text" class="form-control" name="nome" value="Lavien" placeholder="Ex: Pão Italiano">
-        </div>
-
-        <div class="row g-2 mb-3">
-          <div class="col-4">
-            <label class="form-label">Rendimento</label>
-            <input type="number" step="0.01" class="form-control" name="rendimento_valor" value="1.0">
-          </div>
-          <div class="col-4">
-            <label class="form-label">Em</label>
-            <select class="form-select" name="rendimento_unidade">
-              <option value="g">g</option>
-              <option value="kg" selected>kg</option>
-              <option value="ml">ml</option>
-              <option value="l">L</option>
-              <option value="un">un</option>
-            </select>
-          </div>
-          <div class="col-4">
-            <label class="form-label">Porções</label>
-            <input type="number" class="form-control" name="porcoes" value="400">
-          </div>
-        </div>
-
-        <div class="mb-2">
-          <label class="form-label">Modo de preparo</label>
-          <textarea class="form-control" name="modo_preparo" rows="4" placeholder="Descreva o preparo da receita..."></textarea>
-        </div>
-      </div>
-
-      <div class="modal-footer d-flex justify-content-between">
-        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-          Cancelar
-        </button>
-        <button type="submit" class="btn btn-success">
-          Salvar
-        </button>
-      </div>
-    </form>
-  </div>
-</div>
+<x-food.modal.recipe-form 
+  title="Novo/Editar" 
+  name="Lavien" 
+  yield="1.0" 
+  unit="kg" 
+  portions="400" 
+  preparation="" 
+/>
 
 <!-- ========================================================= -->
 <!-- MODAL 2: Ingrediente (Novo/Editar insumo) -->

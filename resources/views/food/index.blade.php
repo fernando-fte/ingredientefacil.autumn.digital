@@ -7,9 +7,9 @@
 <div class="container py-4">
     <div class="d-flex align-items-center justify-content-between mb-4">
         <h3 class="mb-0">Receitas</h3>
-        <a href="{{ route('web.food.create') }}" class="btn btn-primary">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalReceita">
             + Nova Receita
-        </a>
+        </button>
     </div>
 
     <div class="d-flex flex-nowrap overflow-auto gap-3 pb-2">
@@ -58,5 +58,7 @@
             </div>
         @endforeach
     </div>
+    <!-- Modal de Nova Receita -->
+    <x-food.modal.recipe-form title="Nova receita" food="" modalId="modalReceita" />
 </div>
 @endsection
