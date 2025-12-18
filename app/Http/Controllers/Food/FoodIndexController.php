@@ -3,19 +3,21 @@
 namespace App\Http\Controllers\Food;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Food\FoodIndexRequest;
+use App\Models\Food\Food;
 use Exception;
 use Illuminate\Http\Request;
 
 class FoodIndexController extends FoodController
 {
-    public function __invoke(Request $request)
+    public function __invoke(FoodIndexRequest $request)
     {
         try {
 
-            // Lógica para obter os dados da receita a serem exibidos
+            $foods = Food::all();
 
             $response = [
-                // Dados da receita a serem exibidos
+                'foods' => $foods,
             ];
 
             return self::success('food.index', $response);
