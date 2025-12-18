@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Food\Modal;
 
+use App\Models\Food\Food;
 use Illuminate\View\Component;
 
 class RecipeForm extends Component
@@ -9,6 +10,8 @@ class RecipeForm extends Component
     public $id;
     public $modalId;
     public $title;
+    public $route;
+    
     public $name;
     public $yield;
     public $unit;
@@ -18,19 +21,18 @@ class RecipeForm extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct($title = 'Novo/Editar', $food, $modalId = null )
+    public function __construct($title = 'Novo/Editar', ?Food $food, $modalId = null )
     {
         $this->title = $title;
         $this->modalId = $modalId ?? null;
         $this->route = $food ? route('web.food.update', ['food' => $food->id]) : route('web.food.store');
         
-        
         $this->id = $food->id??'';
-        $this->name = $food->name??'';
-        $this->yield = $food->yield??'';
-        $this->unit = $food->unit??'';
+        $this->name = $food->title??'';
+        $this->yield = $food->yield_value??'';
+        $this->unit = $food->yield_unit??'';
         $this->portions = $food->portions??'';
-        $this->preparation = $food->preparation??'';
+        $this->preparation = $food->preparation->description??'';
     }
 
     /**

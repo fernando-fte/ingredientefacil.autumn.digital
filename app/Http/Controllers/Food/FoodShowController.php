@@ -3,19 +3,20 @@
 namespace App\Http\Controllers\Food;
 
 use App\Http\Controllers\Controller;
+use App\Models\Food\Food;
 use Exception;
 use Illuminate\Http\Request;
 
 class FoodShowController extends FoodController
 {
-    public function __invoke(Request $request, $food)
+    public function __invoke(Food $food)
     {
         try {
 
             // Lógica para obter os dados da receita a serem exibidos
 
             $response = [
-                // Dados da receita a serem exibidos
+                'food' => $food,
             ];
 
             return self::success('food.show', $response);

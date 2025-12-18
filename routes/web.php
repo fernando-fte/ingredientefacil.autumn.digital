@@ -48,7 +48,7 @@ Route::middleware('auth')->group(function () {
         
         Route::prefix('{food}')->group(function () {
             Route::get('/', FoodShowController::class)->name('show');
-            Route::patch('/', FoodUpdateController::class)->name('update');
+            Route::post('/', FoodUpdateController::class)->name('update');
             
             Route::prefix('/ingrediente')->name('web.food.ingredient.')->group(function () {
                 Route::post('/', FoodIngredientStoreController::class)->name('store');

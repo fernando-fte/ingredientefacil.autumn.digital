@@ -9,8 +9,8 @@
     <!-- Header -->
     <div class="d-flex align-items-start justify-content-between gap-3 mb-3">
         <div>
-            <h3 class="mb-1">Lavien</h3>
-            <div class="text-muted small">Rendimento: <strong>1 kg</strong> • Porções: <strong>400</strong></div>
+            <h3 class="mb-1">{{ $food->title }}</h3>
+            <div class="text-muted small">Rendimento: <strong>{{ $food->yield_value }} {{ $food->yield_unit }}</strong> • Porções: <strong>{{ $food->portions }}</strong></div>
         </div>
         <div class="d-flex align-items-center gap-2">
             <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalReceita">
@@ -179,14 +179,7 @@
 <!-- ========================================================= -->
 <!-- MODAL 1: Receita (Novo/Editar) - COMPONENTE -->
 <!-- ========================================================= -->
-<x-food.modal.recipe-form 
-  title="Novo/Editar" 
-  name="Lavien" 
-  yield="1.0" 
-  unit="kg" 
-  portions="400" 
-  preparation="" 
-/>
+<x-food.modal.recipe-form title="Editar Receita" :food="$food" modalId="modalReceita"/>
 
 <!-- ========================================================= -->
 <!-- MODAL 2: Ingrediente (Novo/Editar insumo) -->

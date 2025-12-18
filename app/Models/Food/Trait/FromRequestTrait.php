@@ -3,6 +3,7 @@
 namespace App\Models\Food\Trait;
 
 use App\Http\Requests\Food\FoodStoreRequest;
+use App\Http\Requests\Food\FoodUpdateRequest;
 
 trait FromRequestTrait
 {
@@ -26,7 +27,7 @@ trait FromRequestTrait
         return $food;
     }
 
-    public function updateFromRequest(FoodStoreRequest $request): self
+    public function updateFromRequest(FoodUpdateRequest $request): self
     {
         $this->update([
             'title' => $request->input('title'),
@@ -34,6 +35,12 @@ trait FromRequestTrait
             'yield_unit' => $request->input('yield.unit'),
             'portions' => $request->input('portions'),
         ]);
+
+        // Atualiza ou cria o preparation único, se enviado
+        if ($request->filled('preparation')) {
+            $this->preparation->description = $request->input('preparation');
+            $this->preparation->save();
+        }
 
         return $this;
     }
