@@ -2,11 +2,14 @@
 
 namespace App\Models\Food;
 
+use App\Models\Food\Trait\FromRequestTrait;
+use App\Models\Shared\Preparation;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Food extends Model
 {
+    use FromRequestTrait;
+    
     protected $table = 'foods';
     protected $fillable = [
         'title',
@@ -16,10 +19,10 @@ class Food extends Model
     ];
 
     /**
-     * Relacionamento: modos de preparo (polimórfico)
+     * Relacionamento: modo de preparo único (polimórfico)
      */
-    public function preparations(): MorphMany
+    public function preparation()
     {
-        return $this->morphMany(\App\Models\Shared\Preparation::class, 'preparationable');
+        return $this->morphOne(Preparation::class, 'preparationable');
     }
 }

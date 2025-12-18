@@ -39,7 +39,7 @@
 
                 <div class="mb-2">
                     <label class="form-label">Modo de preparo</label>
-                    <textarea class="form-control" name="modo_preparo" rows="4" placeholder="Descreva o preparo da receita...">{{ $preparation ?? '' }}</textarea>
+                    <textarea class="form-control" name="preparation" rows="4" placeholder="Descreva o preparo da receita...">{{ $preparation ?? '' }}</textarea>
                 </div>
             </div>
 

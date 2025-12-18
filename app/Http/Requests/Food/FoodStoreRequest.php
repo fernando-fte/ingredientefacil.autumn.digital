@@ -11,7 +11,7 @@ class FoodStoreRequest extends FoodRequest
             'yield.value' => ['required', 'numeric', 'min:0.01'],
             'yield.unit' => ['required', 'string'],
             'portions' => ['required', 'integer', 'min:1'],
-            'modo_preparo' => ['nullable', 'string'],
+            'preparation' => ['nullable', 'string'],
         ];
     }
 }

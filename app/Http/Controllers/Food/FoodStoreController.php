@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Food;
 use App\Http\Controllers\Controller;
 use Exception;
 use App\Http\Requests\Food\FoodStoreRequest;
+use App\Models\Food\Food;
+use Illuminate\Support\Facades\DB;
 
 class FoodStoreController extends Controller
 {
@@ -12,12 +14,18 @@ class FoodStoreController extends Controller
     {
         try {
 
-            dd($request->all());
+            DB::beginTransaction();
 
-            // Lógica para obter os dados da receita a serem exibidos
+            # Cria a receita a partir do request
+            $food = Food::createFromRequest($request);
+            
+            # Carrega o relacionamento 'preparation' junto com o model Food
+            $food->load('preparation');
+
+            DB::commit();
 
             $response = [
-                // Dados da receita a serem exibidos
+                'food' => $food,
             ];
 
             return self::success('food.store', $response);
