@@ -86,6 +86,6 @@
         @endforeach
     </div>
     <!-- Modal de Nova Receita -->
-    <x-food.modal.recipe-form title="Nova receita" food="" modalId="modalReceita" />
+    <x-food.modal.recipe-form title="Nova receita" modalId="modalReceita" />
 </div>
 @endsection

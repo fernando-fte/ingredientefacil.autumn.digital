@@ -21,7 +21,7 @@ class RecipeForm extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct($title = 'Novo/Editar', ?Food $food, $modalId = null )
+    public function __construct($title = 'Novo/Editar', ?Food $food = null, $modalId = null )
     {
         $this->title = $title;
         $this->modalId = $modalId ?? null;
